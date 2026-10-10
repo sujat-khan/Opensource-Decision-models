@@ -1,0 +1,233 @@
+/* ── Opensource Decision Models — Custom Streamlit Theme ─────────── */
+
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── Root variables ─────────────────────────────────────────────── */
+:root {
+    --primary: #6C63FF;
+    --primary-glow: rgba(108, 99, 255, 0.3);
+    --secondary: #3B82F6;
+    --accent: #8B5CF6;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --danger: #EF4444;
+
+    --bg-deep: #0F0F1A;
+    --bg-surface: #1A1A2E;
+    --bg-card: #242440;
+    --bg-input: #1E1E35;
+
+    --text-primary: #E2E8F0;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+
+    --border: rgba(255, 255, 255, 0.06);
+    --border-hover: rgba(255, 255, 255, 0.12);
+
+    --radius: 12px;
+    --radius-sm: 8px;
+
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ── Global ──────────────────────────────────────────────────────── */
+.stApp {
+    font-family: var(--font) !important;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────── */
+section[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-surface) 100%) !important;
+    border-right: 1px solid var(--border) !important;
+}
+
+section[data-testid="stSidebar"] .stMarkdown h1,
+section[data-testid="stSidebar"] .stMarkdown h2,
+section[data-testid="stSidebar"] .stMarkdown h3 {
+    color: var(--text-primary) !important;
+}
+
+/* ── Metric cards ────────────────────────────────────────────────── */
+[data-testid="stMetric"] {
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-surface)) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    padding: 1rem 1.25rem !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-testid="stMetricValue"] {
+    font-weight: 600 !important;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────── */
+.stButton > button {
+    border-radius: var(--radius-sm) !important;
+    font-weight: 500 !important;
+    font-family: var(--font) !important;
+    transition: all 0.2s ease !important;
+    border: 1px solid var(--border) !important;
+}
+
+.stButton > button:hover {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 20px var(--primary-glow) !important;
+    transform: translateY(-1px) !important;
+}
+
+.stButton > button[kind="primary"]:not(:disabled) {
+    background: linear-gradient(135deg, var(--primary), var(--accent)) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.stButton > button:disabled {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+
+/* ── Text inputs and areas ───────────────────────────────────────── */
+.stTextInput > div > div > input,
+.stTextArea > div > div > textarea {
+    border-radius: var(--radius-sm) !important;
+    border: 1px solid var(--border) !important;
+    font-family: var(--font) !important;
+    transition: border-color 0.2s ease !important;
+}
+
+.stTextInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 2px var(--primary-glow) !important;
+}
+
+/* ── Select boxes ────────────────────────────────────────────────── */
+.stSelectbox > div > div {
+    border-radius: var(--radius-sm) !important;
+}
+
+/* ── Expander ────────────────────────────────────────────────────── */
+.streamlit-expanderHeader {
+    font-family: var(--font) !important;
+    font-weight: 500 !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+/* ── Divider ─────────────────────────────────────────────────────── */
+hr {
+    border-color: var(--border) !important;
+    margin: 0.75rem 0 !important;
+}
+
+/* ── Status indicators ───────────────────────────────────────────── */
+.status-connected {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(16, 185, 129, 0.12);
+    color: var(--success);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-disconnected {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: rgba(239, 68, 68, 0.12);
+    color: var(--danger);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* ── Pulse animation for connection dot ──────────────────────────── */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.pulse-dot.connected {
+    background: var(--success);
+    box-shadow: 0 0 8px var(--success);
+}
+
+.pulse-dot.disconnected {
+    background: var(--danger);
+    box-shadow: 0 0 8px var(--danger);
+}
+
+/* ── Model card in sidebar ───────────────────────────────────────── */
+.model-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px;
+    margin: 4px 0;
+    transition: all 0.2s ease;
+}
+
+.model-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 12px var(--primary-glow);
+}
+
+.model-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-decision { background: rgba(108, 99, 255, 0.15); color: #6C63FF; }
+.badge-vision { background: rgba(6, 182, 212, 0.15); color: #06B6D4; }
+.badge-tools { background: rgba(245, 158, 11, 0.15); color: #F59E0B; }
+.badge-thinking { background: rgba(139, 92, 246, 0.15); color: #8B5CF6; }
+
+/* ── Question container ──────────────────────────────────────────── */
+div[data-testid="stVerticalBlock"] > div:has(.stTextArea) {
+    border-radius: var(--radius) !important;
+}
+
+/* ── Success/Info/Warning boxes ──────────────────────────────────── */
+.stSuccess, .stInfo, .stWarning {
+    border-radius: var(--radius-sm) !important;
+}
+
+/* ── Plotly chart containers ─────────────────────────────────────── */
+.stPlotlyChart {
+    border-radius: var(--radius) !important;
+    overflow: hidden;
+}
+
+/* ── Title styling ───────────────────────────────────────────────── */
+h1 {
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+}
+
+h2, h3 {
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+}
