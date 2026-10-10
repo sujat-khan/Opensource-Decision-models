@@ -1,10 +1,10 @@
-# 🧠 Opensource Decision Models — Streamlit Test UI
+# Opensource Decision Models — Streamlit Test UI
 
 A modern Streamlit application for testing, benchmarking, and comparing **open-source decision models** running locally on **Ollama** via the `/v1/systemone` specification and the official TypeSafe SDK, featuring interactive Plotly visualizations, multiple execution backends, and a built-in simulation mode.
 
 ---
 
-## 💡 What are Decision Models?
+## What are Decision Models?
 
 Decision models are a specialized category of AI models that **do not generate conversational prose**. Instead, they evaluate an input text or JSON payload ("state") against typed questions and return **deterministic, structured judgments with calibrated probabilities** in a single forward pass:
 
@@ -15,22 +15,22 @@ Decision models are a specialized category of AI models that **do not generate c
 
 ---
 
-## 🤖 Supported Models & Platform Compatibility
+## Supported Models & Platform Compatibility
 
 > [!IMPORTANT]
 > **Windows Users:** The `laya` model is built exclusively for Apple Silicon (MLX runtime) and will fail with `Error: this model requires MLX support` on Windows. For Windows and Linux, use **`tev1:0.8b`**, **`tev1` (4B)**, or **`nimble` (9B)**.
 
 | Model | Size | Maker | Base Arch | OS Compatibility | Recommendation | Pull Command |
 |-------|------|-------|-----------|------------------|----------------|--------------|
-| **tev1:0.8b** | ~800 MB | Together AI | Qwen3.5 | Windows, Linux, macOS | ⚡ **Best for CPU / Laptops (Fastest)** | `ollama pull tev1:0.8b` |
-| **tev1** | ~4.5 GB (4B) | Together AI | Qwen3.5 | Windows, Linux, macOS | 🎯 High accuracy | `ollama pull tev1` |
-| **nimble** | ~5.5 GB (9B) | Bespoke Labs | Qwen3.5 | Windows, Linux, macOS | 🔬 Heavyweight classification | `ollama pull nimble` |
-| **clef-flash** | ~5.5 GB (9B) | Cloudflare | Vision / Text | Windows, Linux, macOS | 🖼️ Multimodal | `ollama pull clef-flash` |
-| **laya** | 846 MB | Convai Innovations | ModernBERT | **macOS Apple Silicon only** | 🍎 Mac MLX only | `ollama pull laya` |
+| **tev1:0.8b** | ~800 MB | Together AI | Qwen3.5 | Windows, Linux, macOS | **Best for CPU / Laptops (Fastest)** | `ollama pull tev1:0.8b` |
+| **tev1** | ~4.5 GB (4B) | Together AI | Qwen3.5 | Windows, Linux, macOS | High accuracy | `ollama pull tev1` |
+| **nimble** | ~5.5 GB (9B) | Bespoke Labs | Qwen3.5 | Windows, Linux, macOS | Heavyweight classification | `ollama pull nimble` |
+| **clef-flash** | ~5.5 GB (9B) | Cloudflare | Vision / Text | Windows, Linux, macOS | Multimodal | `ollama pull clef-flash` |
+| **laya** | 846 MB | Convai Innovations | ModernBERT | **macOS Apple Silicon only** | Mac MLX only | `ollama pull laya` |
 
 ---
 
-## ⚡ Hardware & Latency Guide (CPU vs GPU)
+## Hardware & Latency Guide (CPU vs GPU)
 
 Decision models run natively via Ollama on both CPU and GPU:
 
@@ -39,14 +39,14 @@ Decision models run natively via Ollama on both CPU and GPU:
 | **CPU / Integrated GPU** (e.g. Intel Iris Xe) | **`tev1:0.8b`** | **~6–9 seconds** | 5x fewer parameters than 4B; 4x faster on CPU |
 | **CPU / Integrated GPU** | `tev1` (4B) | ~30–40 seconds | Requires heavy CPU compute per token pass |
 | **Dedicated GPU** (NVIDIA CUDA) | `tev1:0.8b` or `tev1` | **< 100 ms** | Ultra-fast parallelized tensor evaluation |
-| **Any Hardware** | **🎭 Simulation Mode** | **< 20 ms** | Instant UI testing without model weights |
+| **Any Hardware** | **Simulation Mode** | **< 20 ms** | Instant UI testing without model weights |
 
 > [!TIP]
 > **Warm Cache:** The first decision run on any model cold-loads the weights into memory. Subsequent runs are significantly faster because the app keeps the model warm in RAM with `keep_alive: "30m"`.
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Activate Environment & Install Dependencies
 ```powershell
@@ -77,29 +77,29 @@ Open your browser at **`http://localhost:8501`**.
 
 ---
 
-## ✨ Features
+## Features
 
-- **⚡ Instant Demo / Simulation Mode:** Test all scenarios, question types, and visualizations immediately without waiting for model downloads.
-- **🛠️ Visual Question Builder:** Interactively construct `choice`, `noul`, and `score` questions with full rubric configuration.
-- **📁 Pre-built Scenarios:**
-  - 💼 *Career & Role Decision* (role matching between AI Engineer / ML Engineer / Data Scientist, 90-day hiring probability, preparation check)
-  - 📧 *Email Triage* (department routing, urgency score, churn risk, phishing detection)
-  - 🛡️ *Content Moderation* (spam detection, toxicity grading, action recommendation)
-  - 🎯 *Intent Routing* (support triage, sentiment score, escalation flag)
-  - 🔧 *Tool-Call Safety* (agent safety guardrails and harm assessment)
-  - 🔍 *Fact Verification* (evidence-based claim checking)
-- **📊 Rich Interactive Visualizations:**
+- **Instant Demo / Simulation Mode:** Test all scenarios, question types, and visualizations immediately without waiting for model downloads.
+- **Visual Question Builder:** Interactively construct `choice`, `noul`, and `score` questions with full rubric configuration.
+- **Pre-built Scenarios:**
+  - *Career & Role Decision* (role matching between AI Engineer / ML Engineer / Data Scientist, 90-day hiring probability, preparation check)
+  - *Email Triage* (department routing, urgency score, churn risk, phishing detection)
+  - *Content Moderation* (spam detection, toxicity grading, action recommendation)
+  - *Intent Routing* (support triage, sentiment score, escalation flag)
+  - *Tool-Call Safety* (agent safety guardrails and harm assessment)
+  - *Fact Verification* (evidence-based claim checking)
+- **Interactive Visualizations:**
   - Horizontal probability bars with highlighted winner for `choice`
   - Calibrated probability gauges for `noul` (boolean judgments)
   - Rubric distribution charts with expected scores for `score`
-- **🔀 Multi-Model Comparison:** Benchmark latency and compare decisions side-by-side across multiple models.
-- **🔄 Dual Backends:** Run via raw HTTP `/v1/systemone` or official TypeSafe Python SDK (`typesafe-sdk`).
-- **💾 JSON Export:** One-click download of full API request and response payloads.
-- **🎨 Custom Dark Theme:** Curated glassmorphism design with responsive micro-animations.
+- **Multi-Model Comparison:** Benchmark latency and compare decisions side-by-side across multiple models.
+- **Dual Backends:** Run via raw HTTP `/v1/systemone` or official TypeSafe Python SDK (`typesafe-sdk`).
+- **JSON Export:** One-click download of full API request and response payloads.
+- **Custom Dark Theme:** Curated glassmorphism design with responsive micro-animations.
 
 ---
 
-## ❓ Question Types
+## Question Types
 
 | Type | Purpose | Returns | Example |
 |------|---------|---------|---------|
@@ -109,7 +109,7 @@ Open your browser at **`http://localhost:8501`**.
 
 ---
 
-## 📡 API Reference
+## API Reference
 
 ### 1. Via Raw HTTP (`/v1/systemone`)
 
@@ -168,7 +168,7 @@ print(response.answers.churn_risk.noul)          # 0.84
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 ├── app.py                      # Main Streamlit application & layout
@@ -185,6 +185,6 @@ print(response.answers.churn_risk.noul)          # 0.84
 
 ---
 
-## 📄 License
+## License
 
 MIT
